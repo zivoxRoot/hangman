@@ -44,7 +44,7 @@ func newHangman(wordlistPath string) (*hangman, string) {
 	}
 
 	hangman := hangman{
-		6,
+		7,
 		randomWord,
 		make([]string, 0),
 		make([]string, 0),

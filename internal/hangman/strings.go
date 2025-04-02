@@ -37,6 +37,15 @@ func printHangmanState(state int) string {
 	var hangman string
 
 	switch state {
+	case 7:
+		hangman = `
+
+
+
+
+
+
+		`
 	case 6:
 		hangman = `
 
@@ -99,8 +108,6 @@ func printHangmanState(state int) string {
 		┃    /|\
 		┃    / \
 		┗━━━━━━━
-
-		GAME OVER !!!
 		`
 	}
 	return hangman

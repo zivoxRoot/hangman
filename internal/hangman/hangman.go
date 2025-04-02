@@ -69,7 +69,7 @@ func getDefaultWordlist() (string, error) {
 	return wordlist, nil
 }
 
-// getGoalWord get a random world in a given wordlist.
+// getGoalWord get a random word in a given wordlist.
 func getGoalWord(filePath string) (string, error) {
 
 	// Open the wordlist.

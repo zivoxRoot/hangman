@@ -103,7 +103,7 @@ func updateFrontend(hangman *hangman) {
 
 	// Check if the player won the game.
 	if hangman.isWordFound() {
-		fmt.Printf("\n%vYou won, congratulation !%v\n", color.Cyan(), color.Reset())
+		fmt.Printf("\n%vYou won, congratulations !%v\n", color.Cyan(), color.Reset())
 		os.Exit(0)
 	}
 

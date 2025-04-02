@@ -45,9 +45,11 @@ func printHangmanState(state int) string {
 
 
 
+
 		`
 	case 6:
 		hangman = `
+
 
 
 

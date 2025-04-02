@@ -87,7 +87,11 @@ func updateFrontend(hangman *hangman) {
 	fmt.Print("\n")
 
 	// Print the partially found word.
-	fmt.Printf("\n%vWord%v : %v\n", color.Bold(), color.Reset(), hangman.printRightLetters())
+	if hangman.TriesLeft == 0 {
+		fmt.Printf("\n%vWord%v : %v\n", color.Bold(), color.Reset(), hangman.GoalWord)
+	} else {
+		fmt.Printf("\n%vWord%v : %v\n", color.Bold(), color.Reset(), hangman.printRightLetters())
+	}
 
 	// Check if the player need help.
 	if needHelp {

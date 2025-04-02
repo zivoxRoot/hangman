@@ -44,7 +44,7 @@ func newHangman(wordlistPath string) (*hangman, string) {
 	}
 
 	hangman := hangman{
-		6,
+		7,
 		randomWord,
 		make([]string, 0),
 		make([]string, 0),
@@ -86,7 +86,7 @@ func getGoalWord(filePath string) (string, error) {
 	return contentSlice[random], nil
 }
 
-// printRightLetters prints the found letters in the goal word and print dots instead of the secret letters.
+// printRightLetters returns the found letters in the goal word and print dots instead of the secret letters.
 func (h *hangman) printRightLetters() string {
 
 	var output string
@@ -97,6 +97,24 @@ func (h *hangman) printRightLetters() string {
 			output = output + string(i)
 		} else {
 			output = output + "•"
+		}
+
+	}
+
+	return output
+}
+
+// printFullWord returns the full word with the missing letters in red.
+func (h *hangman) printFullWord() string {
+
+	var output string
+
+	for _, i := range h.GoalWord {
+
+		if strings.Contains(strings.Join(h.LettersDone, " "), string(i)) {
+			output = output + string(i)
+		} else {
+			output = output + color.Red() + string(i) + color.Reset()
 		}
 
 	}

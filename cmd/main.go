@@ -34,7 +34,7 @@ func main() {
 
 	if len(args) == 3 {
 		if args[1] == "-w" || args[1] == "--wordlist" {
-			hangman.PlayGame(args[2])
+			hangman.PlayGame(args[2], config)
 		} else {
 			fmt.Println(help.UnknownCommand(args[1]))
 		}

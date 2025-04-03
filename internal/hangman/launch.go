@@ -55,6 +55,12 @@ func PlayGame(wordlistPath string) {
 			player.needHelp = true
 		} else if len(choice) == 1 {
 
+			// Check if the letter was already entered.
+			if strings.Contains(strings.Join(hangman.LettersDone, " "), choice) {
+				player.status = color.Green() + "Are you stupid ? You entered '" + choice + "' twice..." + color.Reset()
+				continue
+			}
+
 			result := hangman.tryLetter(choice)
 
 			if result {

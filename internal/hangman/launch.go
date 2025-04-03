@@ -43,6 +43,8 @@ func PlayGame(wordlistPath string) {
 		fmt.Print("\n> ")
 
 		_, err := fmt.Scanln(&player.choice)
+		// Make all letters lowercase
+		player.choice = strings.ToLower(*&player.choice)
 
 		if err != nil {
 			fmt.Println("Error getting the user input :", err)

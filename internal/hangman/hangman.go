@@ -83,7 +83,8 @@ func getGoalWord(filePath string) (string, error) {
 
 	// Return a random word.
 	random := rand.Intn(len(contentSlice) - 1)
-	return contentSlice[random], nil
+	randomWord := strings.ToLower(contentSlice[random])
+	return randomWord, nil
 }
 
 // printRightLetters returns the found letters in the goal word and print dots instead of the secret letters.

@@ -12,6 +12,7 @@ import (
 // Player represents a player instance.
 type Player struct {
 	status      string
+	choice      string
 	playerQuits bool
 	needHelp    bool
 }
@@ -20,6 +21,7 @@ type Player struct {
 var color = colorer.NewColorer()
 var player = Player{
 	status:      "",
+	choice:      "",
 	playerQuits: false,
 	needHelp:    false,
 }
@@ -40,8 +42,7 @@ func PlayGame(wordlistPath string) {
 		// Prompt the user and get his choice.
 		fmt.Print("\n> ")
 
-		var choice string
-		_, err := fmt.Scanln(&choice)
+		_, err := fmt.Scanln(&player.choice)
 
 		if err != nil {
 			fmt.Println("Error getting the user input :", err)
@@ -49,24 +50,24 @@ func PlayGame(wordlistPath string) {
 		}
 
 		// Check the user input.
-		if choice == "quit" || choice == "exit" {
+		if player.choice == "quit" || player.choice == "exit" {
 			player.playerQuits = true
-		} else if choice == "help" {
+		} else if player.choice == "help" {
 			player.needHelp = true
-		} else if len(choice) == 1 {
+		} else if len(player.choice) == 1 {
 
 			// Check if the letter was already entered.
-			if strings.Contains(strings.Join(hangman.LettersDone, " "), choice) {
-				player.status = color.Green() + "Are you stupid ? You entered '" + choice + "' twice..." + color.Reset()
+			if strings.Contains(strings.Join(hangman.LettersDone, " "), player.choice) {
+				player.status = color.Green() + "Are you stupid ? You entered '" + player.choice + "' twice..." + color.Reset()
 				continue
 			}
 
-			result := hangman.tryLetter(choice)
+			result := hangman.tryLetter(player.choice)
 
 			if result {
-				player.status = color.Cyan() + choice + " -> success!" + color.Reset()
+				player.status = color.Cyan() + player.choice + " -> success!" + color.Reset()
 			} else {
-				player.status = color.Red() + choice + " -> fail..." + color.Reset()
+				player.status = color.Red() + player.choice + " -> fail..." + color.Reset()
 			}
 
 		} else {

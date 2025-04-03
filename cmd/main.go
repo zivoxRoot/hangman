@@ -8,11 +8,18 @@ import (
 	"github.com/zivoxRoot/hangman/internal/help"
 )
 
+var config = hangman.Config{
+	ShowOneLetter: false,
+	ShowBanner:    true,
+	ShowHints:     true,
+	ShowColors:    true,
+}
+
 func main() {
 	args := os.Args
 
 	if len(args) == 1 {
-		hangman.PlayGame("")
+		hangman.PlayGame("", config)
 	}
 
 	if len(args) == 2 {

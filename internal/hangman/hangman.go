@@ -14,10 +14,11 @@ type hangman struct {
 	GoalWord     string
 	LettersDone  []string
 	RightLetters []string
+	Config       Config
 }
 
 // NewHangman initializes a new hangman game. It takes a path to a custom worlist, checks if it exists, else use the default wordlist. It returns a pointer to the Hangman and the used wordlist.
-func newHangman(wordlistPath string) (*hangman, string) {
+func newHangman(wordlistPath string, config Config) (*hangman, string) {
 
 	// usedWordlist is the used wordlist between the one given by the user and the default one.
 	var usedWordlist string
@@ -48,6 +49,7 @@ func newHangman(wordlistPath string) (*hangman, string) {
 		randomWord,
 		make([]string, 0),
 		make([]string, 0),
+		config,
 	}
 
 	return &hangman, usedWordlist

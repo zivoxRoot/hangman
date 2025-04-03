@@ -27,17 +27,17 @@ var player = Player{
 }
 
 // PlayGame launches and handles a new game.
-func PlayGame(wordlistPath string) {
+func PlayGame(wordlistPath string, config Config) {
 
 	// Initialize a hangman.
-	var hangman, usedWordlist = newHangman(wordlistPath)
+	var hangman, usedWordlist = newHangman(wordlistPath, config)
 	player.status = color.Green() + "Using a random word from : " + usedWordlist + color.Reset()
 
 	// Main loop.
 	for {
 
 		// Update the front-end.
-		updateFrontend(hangman)
+		updateFrontend(hangman, config)
 
 		// Prompt the user and get his choice.
 		fmt.Print("\n> ")
@@ -78,7 +78,7 @@ func PlayGame(wordlistPath string) {
 	}
 }
 
-func updateFrontend(hangman *hangman) {
+func updateFrontend(hangman *hangman, config Config) {
 
 	// Clear the screen.
 	c := exec.Command("clear")
@@ -86,8 +86,12 @@ func updateFrontend(hangman *hangman) {
 	c.Run()
 
 	// Greet and display hints.
-	fmt.Println(greet())
-	fmt.Println(hints())
+	if config.ShowBanner {
+		fmt.Println(greet())
+	}
+	if config.ShowHints {
+		fmt.Println(hints())
+	}
 
 	// Print the hangman.
 	fmt.Println(printHangmanState(hangman.TriesLeft))

@@ -2,7 +2,7 @@ package hangman
 
 // greet returns the hangman greeter.
 func greet() string {
-return `
+	return `
  __    __
 | $$  | $$  ______   _______    ______   ______ ____    ______   _______
 | $$  | $$  ______   _______    ______   ______ ____    ______   _______

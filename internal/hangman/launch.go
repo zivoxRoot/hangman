@@ -9,18 +9,27 @@ import (
 	"github.com/zivoxRoot/hangman/internal/colorer"
 )
 
+// Player represents a player instance.
+type Player struct {
+	status      string
+	playerQuits bool
+	needHelp    bool
+}
+
 // Declare and initialize necessary values.
 var color = colorer.NewColorer()
-var status string
-var playerQuits bool
-var needHelp bool
+var player = Player{
+	status:      "",
+	playerQuits: false,
+	needHelp:    false,
+}
 
 // PlayGame launches and handles a new game.
 func PlayGame(wordlistPath string) {
 
 	// Initialize a hangman.
 	var hangman, usedWordlist = newHangman(wordlistPath)
-	status = color.Green() + "Using a random word from : " + usedWordlist + color.Reset()
+	player.status = color.Green() + "Using a random word from : " + usedWordlist + color.Reset()
 
 	// Main loop.
 	for {
@@ -41,21 +50,21 @@ func PlayGame(wordlistPath string) {
 
 		// Check the user input.
 		if choice == "quit" || choice == "exit" {
-			playerQuits = true
+			player.playerQuits = true
 		} else if choice == "help" {
-			needHelp = true
+			player.needHelp = true
 		} else if len(choice) == 1 {
 
 			result := hangman.tryLetter(choice)
 
 			if result {
-				status = color.Cyan() + choice + " -> success!" + color.Reset()
+				player.status = color.Cyan() + choice + " -> success!" + color.Reset()
 			} else {
-				status = color.Red() + choice + " -> fail..." + color.Reset()
+				player.status = color.Red() + choice + " -> fail..." + color.Reset()
 			}
 
 		} else {
-			status = color.Green() + "You should only enter 1 letter" + color.Reset()
+			player.status = color.Green() + "You should only enter 1 letter" + color.Reset()
 		}
 	}
 }
@@ -94,14 +103,14 @@ func updateFrontend(hangman *hangman) {
 	fmt.Print("\n")
 
 	// Check if the player need help.
-	if needHelp {
-		status = printHelp()
-		needHelp = false
+	if player.needHelp {
+		player.status = printHelp()
+		player.needHelp = false
 	}
 
 	// Check if the player wants to quit.
-	if playerQuits {
-		status = color.Green() + "See you later :)" + color.Reset()
+	if player.playerQuits {
+		player.status = color.Green() + "See you later :)" + color.Reset()
 		defer os.Exit(0)
 	}
 
@@ -118,6 +127,6 @@ func updateFrontend(hangman *hangman) {
 	}
 
 	// Print the status and reset it.
-	fmt.Printf("\n%v\n", status)
-	status = ""
+	fmt.Printf("\n%v\n", player.status)
+	player.status = ""
 }

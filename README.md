@@ -8,20 +8,6 @@ A hangman game right in your terminal !
 - Choose between the default wordlist or give your own
 - Automatic color support for 16 colors, 256 colors, and truecolor
 
-## Usage
-
-Start the game :
-
-```bash
-hangman
-```
-
-Start the game with your own wordlist :
-
-```Bash
-hangman -w /path/to/your/wordlist.txt
-```
-
 ## Installation
 
 1. Installation script :
@@ -61,3 +47,18 @@ sudo mv bin/linux/hangman /usr/local/bin
 mkdir -p $HOME/.config/hangman
 cp assets/words.txt $HOME/.config/hangman/
 ```
+
+## Usage
+
+Start the game :
+
+```bash
+hangman
+```
+
+Start the game with your own wordlist :
+
+```Bash
+hangman -w /path/to/your/wordlist.txt
+```
+
